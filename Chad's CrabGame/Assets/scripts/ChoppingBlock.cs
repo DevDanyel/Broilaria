@@ -35,6 +35,7 @@ public class ChoppingBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //will maybe think about moving this so its not running all the time ****
         if(currentIngrediant && onion !=null){
             if(onion.IngrediantsObject.chopStatus==true){
                 onion.ChangeMeshToChopped();
