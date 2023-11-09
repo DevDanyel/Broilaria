@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChoppingBlock : MonoBehaviour
 {
-
+    public ApplianceObject AppObj;
     [SerializeField] private Rigidbody currentIngrediant;
     [SerializeField] private Transform currentIngrediantPos;
     //[SerializeField] private ??? currentIngrediantStatus;
@@ -29,11 +29,17 @@ public class ChoppingBlock : MonoBehaviour
         pp = GameObject.FindGameObjectWithTag("PlayerHolder").GetComponent<physicsPickup>();
         //isInCuttingPos = false;
         //playerHasIngrediant = false;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(currentIngrediant && onion !=null){
+            if(onion.IngrediantsObject.chopStatus==true){
+                onion.ChangeMeshToChopped();
+            }
+        }
         playerHasIngrediant = pp.GetHoldingStatus();
         if(isInCuttingPos){
             if(playerHasIngrediant && !currentIngrediant){
@@ -52,8 +58,8 @@ public class ChoppingBlock : MonoBehaviour
                 if(currentIngrediant){
                     if(Input.GetKeyDown(KeyCode.C) ){
                         onion=currentIngrediant.GetComponent<onion>();
-                        onion.ChangeMeshToChopped();
-                    }
+                        onion.IncreaseCutStatus();     
+                    }   
                 }
                 //if(currentIngrediantStatus == "unchopped"){ 
                 //    if(Input.GetKeyDown == Key.KeyCode("C")){
